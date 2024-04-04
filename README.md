@@ -1,7 +1,10 @@
 # <code>M.T. Weather</code>
 ---
 ## Requirements
-- Docker Desktop (on MacOS, orbstack is preferred)
+- docker, docker-compose cli (the following gui apps will install them for you)
+    - [Rancher Desktop](https://rancherdesktop.io/) on windows/mac/linux
+    - [Orbstack](https://orbstack.dev) on mac (recommended)
+    - [Docker Desktop](https://www.docker.com/products/docker-desktop/) on windows/mac/linux
 - Dev Containers extension
 ## How to run
 In VSCode:
