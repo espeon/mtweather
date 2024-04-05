@@ -7,7 +7,7 @@
 include_once("db.php");
 
 function sayHello($name) {
-	echo "Hello $name!";
+	echo "<div class=\"mb-2\">Hello $name!</div>";
 }
 
 ?>
@@ -21,15 +21,26 @@ function sayHello($name) {
 	</head>
 	<body class="base">
 		<center class="base">
-		<div class="text-4xl">weather app</div>
+		<div class="text-4xl pt-16 pb-2">weather app</div>
 		<?php 
 		
 		sayHello('remote world, from VSCode');
 
+		echo "PHP version "
+		.phpversion();
+
+		echo "<br> Apache version ";
+		$apa = apache_get_version();
+		# trim "Apache/"
+		echo substr($apa, 7);
+
 		$result = mysqli_query($mysqli, "SELECT version() as version;");
-		echo "<br>Running ";
+		echo "<br>MySQL version ";
 		echo $result->fetch_object()->version;
-			
+
+		echo "<br>Running on ";
+		$os = "cat /etc/*-release | grep \"PRETTY_NAME\" | sed 's/PRETTY_NAME=//g' | sed 's/\"//g'";
+		echo shell_exec($os);
 		?>
 		</center>
 	</body>
