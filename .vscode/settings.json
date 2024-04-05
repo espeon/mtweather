@@ -1,0 +1,12 @@
+{
+    "emeraldwalk.runonsave": {
+        "shell": "bash",
+        "commands": [
+               {
+                   "match": ".*\\.css|.*\\.php$",
+                   "cmd": "/home/vscode/.bun/bin/bunx tailwindcss -i ./src/pre.css -o ./src/post.css --minify"
+               },
+
+        ]
+    }
+}
