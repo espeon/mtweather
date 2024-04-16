@@ -1,12 +1,5 @@
 
  
-var tempHi;
-
-var tempLo;
-
-var windSpeed;
-
-var forecastDescription;
 
 
 
@@ -77,6 +70,24 @@ async function fetchMetaData(latitude, longitude) {
 
 async function getForecast(url){
   console.log(url);
+  try {
+    var response = await fetch(url);
+    var data = await response.json();
+    console.log(data);
+    
+    
+    return data;
+  } catch (error) {
+    console.error('Error fetching weather data:', error);
+    return null;
+  }
+
+
+}
+
+async function getForecastHourly(url){
+  console.log(url);
+  url = url + 'hourly';
   try {
     var response = await fetch(url);
     var data = await response.json();
