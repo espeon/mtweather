@@ -1,25 +1,151 @@
 
- 
-
-
+var hourlyData;
+var longPeriodData;
 
 
 //default weather
 async function mtsuWeather()
 {
+  //getting weather
+  var data = await fetchMetaData(35.8486,-86.3669);//mtsu coordinates
+  var hourlyForecast = await getForecast(data);
+  var longPeriodForecast = await getForecastHourly(data);
 
+
+  //Array declarations, forecast objects constructed and pushed into respective arrays
+  let hourlyLocal = [];
+  let longLocal = [];
+  for (let i = 0; i < 12; i++){
+  	hourlyLocal[i] = new hourlyWeather(hourlyForecast.properties.periods[i].number,
+					   hourlyForecast.properties.periods[i].startTime,
+					   hourlyForecast.properties.periods[i].endTime,
+					   hourlyForecast.properties.periods[i].isDaytime,
+					   hourlyForecast.properties.periods[i].temperature,
+					   hourlyForecast.properties.periods[i].temperatureUnit,
+					   hourlyForecast.properties.periods[i].probabilityOfPrecipitation,
+					   hourlyForecast.properties.periods[i].dewpoint,
+					   hourlyForecast.properties.periods[i].relativeHumidity,
+					   hourlyForecast.properties.periods[i].windSpeed,
+					   hourlyForecast.properties.periods[i].windDirection,
+					   hourlyForecast.properties.periods[i].shortForecast,
+					   hourlyForecast.properties.periods[i].detailedForecast);
+	//Output test in console log
+	//console.log("Hourly number " + hourlyLocal[i].number);
+	//console.log(hourlyLocal[i]);
+  }
+
+  for (let i = 0; i < 14; i++){
+  	longLocal[i] = new longPeriodWeather(longPeriodForecast.properties.periods[i].number,
+			 		     longPeriodForecast.properties.periods[i].startTime,
+					     longPeriodForecast.properties.periods[i].endTime,
+					     longPeriodForecast.properties.periods[i].isDaytime,
+					     longPeriodForecast.properties.periods[i].temperature,
+					     longPeriodForecast.properties.periods[i].temperatureUnit,
+					     longPeriodForecast.properties.periods[i].probabilityOfPrecipitation,
+					     longPeriodForecast.properties.periods[i].dewpoint,
+					     longPeriodForecast.properties.periods[i].relativeHumidity,
+					     longPeriodForecast.properties.periods[i].windSpeed,
+					     longPeriodForecast.properties.periods[i].windDirection,
+					     longPeriodForecast.properties.periods[i].shortForecast,
+					     longPeriodForecast.properties.periods[i].detailedForecast);
+               
+	//console.log("Long Period number " + longLocal[i].number);
+	//console.log(longLocal[i]);
+    }
+  console.log(hourlyLocal[0].temperature);
+
+  hourlyData = hourlyLocal;
+  longPeriodData=longLocal;
+
+  
 }
 
 //user location based weather
 async function localWeather()
 {
-
+    //Array declarations, forecast objects constructed and pushed into respective arrays
+    let hourlyLocal = [];
+    let longLocal = [];
+    for (let i = 0; i < 12; i++){
+      hourlyLocal[i] = new hourlyWeather(hourlyForecast.properties.periods[i].number,
+               hourlyForecast.properties.periods[i].startTime,
+               hourlyForecast.properties.periods[i].endTime,
+               hourlyForecast.properties.periods[i].isDaytime,
+               hourlyForecast.properties.periods[i].temperature,
+               hourlyForecast.properties.periods[i].temperatureUnit,
+               hourlyForecast.properties.periods[i].probabilityOfPrecipitation,
+               hourlyForecast.properties.periods[i].dewpoint,
+               hourlyForecast.properties.periods[i].relativeHumidity,
+               hourlyForecast.properties.periods[i].windSpeed,
+               hourlyForecast.properties.periods[i].windDirection,
+               hourlyForecast.properties.periods[i].shortForecast,
+               hourlyForecast.properties.periods[i].detailedForecast);
+    //Output test in console log
+    console.log("Hourly number " + hourlyLocal[i].number);
+    console.log(hourlyLocal[i]);
+    }
+  
+    for (let i = 0; i < 14; i++){
+      longLocal[i] = new longPeriodWeather(longPeriodForecast.properties.periods[i].number,
+                  longPeriodForecast.properties.periods[i].startTime,
+                 longPeriodForecast.properties.periods[i].endTime,
+                 longPeriodForecast.properties.periods[i].isDaytime,
+                 longPeriodForecast.properties.periods[i].temperature,
+                 longPeriodForecast.properties.periods[i].temperatureUnit,
+                 longPeriodForecast.properties.periods[i].probabilityOfPrecipitation,
+                 longPeriodForecast.properties.periods[i].dewpoint,
+                 longPeriodForecast.properties.periods[i].relativeHumidity,
+                 longPeriodForecast.properties.periods[i].windSpeed,
+                 longPeriodForecast.properties.periods[i].windDirection,
+                 longPeriodForecast.properties.periods[i].shortForecast,
+                 longPeriodForecast.properties.periods[i].detailedForecast);
+    console.log("Long Period number " + longLocal[i].number);
+    console.log(longLocal[i]);
+    }
 }
 
 //user defined location weather
-async function directedWeather()
+async function directedWeather(city,state)
 {
-
+    //Array declarations, forecast objects constructed and pushed into respective arrays
+    let hourlyLocal = [];
+    let longLocal = [];
+    for (let i = 0; i < 12; i++){
+      hourlyLocal[i] = new hourlyWeather(hourlyForecast.properties.periods[i].number,
+               hourlyForecast.properties.periods[i].startTime,
+               hourlyForecast.properties.periods[i].endTime,
+               hourlyForecast.properties.periods[i].isDaytime,
+               hourlyForecast.properties.periods[i].temperature,
+               hourlyForecast.properties.periods[i].temperatureUnit,
+               hourlyForecast.properties.periods[i].probabilityOfPrecipitation,
+               hourlyForecast.properties.periods[i].dewpoint,
+               hourlyForecast.properties.periods[i].relativeHumidity,
+               hourlyForecast.properties.periods[i].windSpeed,
+               hourlyForecast.properties.periods[i].windDirection,
+               hourlyForecast.properties.periods[i].shortForecast,
+               hourlyForecast.properties.periods[i].detailedForecast);
+    //Output test in console log
+    //console.log("Hourly number " + hourlyLocal[i].number);
+    //console.log(hourlyLocal[i]);
+    }
+  
+    for (let i = 0; i < 14; i++){
+      longLocal[i] = new longPeriodWeather(longPeriodForecast.properties.periods[i].number,
+                  longPeriodForecast.properties.periods[i].startTime,
+                 longPeriodForecast.properties.periods[i].endTime,
+                 longPeriodForecast.properties.periods[i].isDaytime,
+                 longPeriodForecast.properties.periods[i].temperature,
+                 longPeriodForecast.properties.periods[i].temperatureUnit,
+                 longPeriodForecast.properties.periods[i].probabilityOfPrecipitation,
+                 longPeriodForecast.properties.periods[i].dewpoint,
+                 longPeriodForecast.properties.periods[i].relativeHumidity,
+                 longPeriodForecast.properties.periods[i].windSpeed,
+                 longPeriodForecast.properties.periods[i].windDirection,
+                 longPeriodForecast.properties.periods[i].shortForecast,
+                 longPeriodForecast.properties.periods[i].detailedForecast);
+    //console.log("Long Period number " + longLocal[i].number);
+    //console.log(longLocal[i]);
+    }
 }
 
 //In-built Geolocation API for HTML
@@ -60,7 +186,7 @@ async function fetchMetaData(latitude, longitude) {
       var response = await fetch(url);
       var data = await response.json();
       var newurl = data['properties']['forecast'];
-      console.log(newurl);
+      //console.log(newurl);
       return newurl;
     } catch (error) {
       console.error('Error fetching weather data:', error);
@@ -69,11 +195,11 @@ async function fetchMetaData(latitude, longitude) {
 }
 
 async function getForecast(url){
-  console.log(url);
+  //console.log(url);
   try {
     var response = await fetch(url);
     var data = await response.json();
-    console.log(data);
+    //console.log(data);
     
     
     return data;
@@ -86,12 +212,12 @@ async function getForecast(url){
 }
 
 async function getForecastHourly(url){
-  console.log(url);
-  url = url + 'hourly';
+  //console.log(url);
+  url = url + '/hourly';
   try {
     var response = await fetch(url);
     var data = await response.json();
-    console.log(data);
+    //console.log(data);
     
     
     return data;
@@ -146,9 +272,10 @@ async function getCoordinates(city, state) {
   }
 }
 
-const x = document.getElementById("demo");
-
-getLocation();
 
 
 
+
+mtsuWeather();
+
+//console.log(longPeriodData[0]["temperature"]);

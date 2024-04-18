@@ -6,7 +6,9 @@
     <title>Document</title>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jsonld/1.0.0/jsonld.min.js"></script>
+    <script src="weatherStorage.js"></script>
     <script src="MTW.js"></script>
+    
 </head>
 
 
