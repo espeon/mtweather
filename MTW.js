@@ -8,8 +8,8 @@ async function mtsuWeather()
 {
   //getting weather
   var data = await fetchMetaData(35.8486,-86.3669);//mtsu coordinates
-  var hourlyForecast = await getForecast(data);
-  var longPeriodForecast = await getForecastHourly(data);
+  var hourlyForecast = await getForecastHourly(data);
+  var longPeriodForecast = await getForecast(data);
 
 
   //Array declarations, forecast objects constructed and pushed into respective arrays
@@ -53,6 +53,7 @@ async function mtsuWeather()
 	//console.log(longLocal[i]);
     }
   console.log(hourlyLocal[0].temperature);
+  console.log(longLocal[0].temperature)
 
   hourlyData = hourlyLocal;
   longPeriodData=longLocal;
