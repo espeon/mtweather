@@ -6,8 +6,14 @@
  *---------------------------------------------------------------------------------------*/
 include_once("db.php");
 
-function sayHello($name) {
+function sayHello($name)
+{
 	echo "<div class=\"mb-2\">Hello $name!</div>";
+}
+
+function isDocker(): bool
+{
+	return is_file("/.dockerenv");
 }
 
 ?>
@@ -15,19 +21,25 @@ function sayHello($name) {
 
 <!DOCTYPE HTML>
 <html>
-	<head>
-		<title>Visual Studio Code Remote :: PHP</title>
-		<link rel="stylesheet" type="text/css" href="post.css">
-	</head>
-	<body class="base">
-		<center class="base">
+
+<head>
+	<title>Visual Studio Code Remote :: PHP</title>
+	<link rel="stylesheet" type="text/css" href="post.css">
+</head>
+
+<body class="base">
+	<center class="base">
 		<div class="text-4xl pt-16 pb-2">weather app</div>
-		<?php 
-		
-		sayHello('remote world, from VSCode');
+		<?php
+
+		if (isDocker()) {
+			sayHello('remote world, from VSCode');
+		} else {
+			sayHello('from XAMPP');
+		}
 
 		echo "PHP version "
-		.phpversion();
+			. phpversion();
 
 		echo "<br> Apache version ";
 		$apa = apache_get_version();
@@ -42,6 +54,7 @@ function sayHello($name) {
 		$os = "cat /etc/*-release | grep \"PRETTY_NAME\" | sed 's/PRETTY_NAME=//g' | sed 's/\"//g'";
 		echo shell_exec($os);
 		?>
-		</center>
-	</body>
+	</center>
+</body>
+
 </html>
