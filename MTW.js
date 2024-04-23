@@ -1,7 +1,4 @@
 
-var hourlyData;
-var longPeriodData;
-
 
 //default weather
 async function mtsuWeather()
@@ -54,15 +51,20 @@ async function mtsuWeather()
     }
   console.log(hourlyLocal[0].temperature);
 
-  hourlyData = hourlyLocal;
-  longPeriodData=longLocal;
+  //document.getElementById("test").innerHTML= longLocal[0].temperature;
 
-  
+
+
 }
 
 //user location based weather
 async function localWeather()
 {
+
+  var data = await fetchMetaData(loc[0],loc[1]);//mtsu coordinates
+  var hourlyForecast = await getForecast(data);
+  var longPeriodForecast = await getForecastHourly(data);
+
     //Array declarations, forecast objects constructed and pushed into respective arrays
     let hourlyLocal = [];
     let longLocal = [];
@@ -87,7 +89,7 @@ async function localWeather()
   
     for (let i = 0; i < 14; i++){
       longLocal[i] = new longPeriodWeather(longPeriodForecast.properties.periods[i].number,
-                  longPeriodForecast.properties.periods[i].startTime,
+                 longPeriodForecast.properties.periods[i].startTime,
                  longPeriodForecast.properties.periods[i].endTime,
                  longPeriodForecast.properties.periods[i].isDaytime,
                  longPeriodForecast.properties.periods[i].temperature,
@@ -105,8 +107,18 @@ async function localWeather()
 }
 
 //user defined location weather
-async function directedWeather(city,state)
-{
+async function directedWeather(city,state){
+
+  
+  var loc = await getCoordinates(city,state);
+  if(loc==null){
+    console.log("Location not found");
+    return;
+  }
+  var data = await fetchMetaData(loc[0],loc[1]);//mtsu coordinates
+  var hourlyForecast = await getForecast(data);
+  var longPeriodForecast = await getForecastHourly(data);
+
     //Array declarations, forecast objects constructed and pushed into respective arrays
     let hourlyLocal = [];
     let longLocal = [];
@@ -131,7 +143,7 @@ async function directedWeather(city,state)
   
     for (let i = 0; i < 14; i++){
       longLocal[i] = new longPeriodWeather(longPeriodForecast.properties.periods[i].number,
-                  longPeriodForecast.properties.periods[i].startTime,
+                 longPeriodForecast.properties.periods[i].startTime,
                  longPeriodForecast.properties.periods[i].endTime,
                  longPeriodForecast.properties.periods[i].isDaytime,
                  longPeriodForecast.properties.periods[i].temperature,
@@ -145,6 +157,8 @@ async function directedWeather(city,state)
                  longPeriodForecast.properties.periods[i].detailedForecast);
     //console.log("Long Period number " + longLocal[i].number);
     //console.log(longLocal[i]);
+
+    //document.getElementById("test").innerHTML= longLocal[0].temperature;
     }
 }
 
@@ -276,6 +290,10 @@ async function getCoordinates(city, state) {
 
 
 
-mtsuWeather();
+//mtsuWeather();
 
-//console.log(longPeriodData[0]["temperature"]);
+directedWeather('Nashvillre','Tennessee');
+
+
+
+//console.log(longPeriodData);
