@@ -293,7 +293,7 @@ async function getCoordinates(city, state) {
 
 //mtsuWeather();
 
-directedWeather('Nashvillre','Tennessee');
+directedWeather('Nashville','Tennessee');
 
 
 
