@@ -49,13 +49,8 @@ async function mtsuWeather()
 	//console.log("Long Period number " + longLocal[i].number);
 	//console.log(longLocal[i]);
     }
-  console.log(hourlyLocal[0].temperature);
-  console.log(longLocal[0].temperature)
 
-  //document.getElementById("test").innerHTML= longLocal[0].temperature;
-
-
-
+    // console.log(hourlyLocal[0].temperature);
 }
 
 //user location based weather
@@ -288,13 +283,56 @@ async function getCoordinates(city, state) {
 }
 
 
+$(document).ready(() => {
+    // mtsuWeather()
+    $("#glance_data").html(test_data["glance"])
+    $("#glance_icon").prop('src', weather_icons["sunny"])
+
+    $("#current_icon").prop('src', weather_icons["sunny"])
+    $("#current_temp").html(test_data["current"][4] + "&deg" + test_data["current"][5])
+    $("#current_rain_chance").html(100*test_data["current"][6] + "% chance")
+    $("#current_humidity").html(100*test_data["current"][8] + "% humidity")
+    $("#current_wind_speed").html(test_data["current"][9] + " " + test_data["current"][10])
+    
+    $("#img_0").prop('src', weather_icons["sunny"])
+    $("#img_1").prop('src', weather_icons["cloudy"])
+    $("#img_2").prop('src', weather_icons["rain"])
+    $("#img_3").prop('src', weather_icons["cloudy"])
+    $("#img_4").prop('src', weather_icons["sunny"])
+    $("#high_0").html(test_data["five_day"][0][4] + "&deg" + test_data["five_day"][0][5])
+    $("#high_1").html(test_data["five_day"][1][4] + "&deg" + test_data["five_day"][1][5])
+    $("#high_2").html(test_data["five_day"][2][4] + "&deg" + test_data["five_day"][2][5])
+    $("#high_3").html(test_data["five_day"][3][4] + "&deg" + test_data["five_day"][3][5])
+    $("#high_4").html(test_data["five_day"][4][4] + "&deg" + test_data["five_day"][4][5])
+    $("#rain_chance_0").html(100*test_data["five_day"][0][6] + "% chance")
+    $("#rain_chance_1").html(100*test_data["five_day"][1][6] + "% chance")
+    $("#rain_chance_2").html(100*test_data["five_day"][2][6] + "% chance")
+    $("#rain_chance_3").html(100*test_data["five_day"][3][6] + "% chance")
+    $("#rain_chance_4").html(100*test_data["five_day"][4][6] + "% chance")
+    
 
 
+})
 
-//mtsuWeather();
+let test_data = {      
+    "glance": "Sunny with a high of 75&degF. No chance of rain.",
+    //          0      1        2        3    4   5     6   7    8        9          10            11               12           
+    "current": [1, "6:00pm", "7:00pm", true, 71, "F", 0.09, 40, 0.32, "9 mph", "from North", "short forecast", "detailed forecast"],
+    //
+    "five_day": [
+    //   0     1          2         3    4   5     6    7    8     9           10              11               12           
+        [1, "12:00am", "11:59pm", true, 75, "F", 0.09, 40, 0.32, "9 mph", "from North", "short forecast", "detailed forecast"],
+        [2, "12:00am", "11:59pm", true, 73, "F", 0.04, 47, 0.47, "4 mph", "from Northeast", "short forecast", "detailed forecast"],
+        [3, "12:00am", "11:59pm", true, 78, "F", 0.7, 52, 0.52, "15 mph", "from South", "short forecast", "detailed forecast"],
+        [4, "12:00am", "11:59pm", true, 81, "F", 0.25, 51, 0.51, "17 mph", "from South", "short forecast", "detailed forecast"],
+        [5, "12:00am", "11:59pm", true, 83, "F", 0.25, 47, 0.47, "14 mph", "from South", "short forecast", "detailed forecast"]
+    ]
+}
 
-directedWeather('Nashville','Tennessee');
-
-
-
-//console.log(longPeriodData);
+let weather_icons = {
+    "cloudy": "./weather_icons/cloudy.png",
+    "moon": "./weather_icons/moon.png",
+    "rain": "./weather_icons/rain.png",
+    "snow": "./weather_icons/snow.png",
+    "sunny": "./weather_icons/sunny.png"
+}

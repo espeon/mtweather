@@ -4,30 +4,66 @@
     --cerulean:       #247ba0ff;
     --celestial-blue: #1b98e0ff;
     --alice-blue:     #e8f1f2ff;
+    --grey:           #c9c9c9
 */
 
 body {
-    background-color: #e8f1f2ff;
+    background-color: #c9c9c9;
 }
 
 .w3-bar {
     background-color: #006494ff;
+    margin: auto;
 }
 
-.w3-bar-item {
+.w3-bar a {
     color: white;
 }
 
-#current_hr, #glance_hr {
+
+#current, #glance{
     margin: auto;
     width: 50%;
     border: 3px solid black;
     text-align: center;
-    margin-bottom: 10px;
+    margin-bottom: 20px;
+    margin-top: 10px;
     border-radius: 10px;
+    background-color: #e8f1f2ff;
+    box-shadow: 5px 10px #247ba0ff;
 }
 
-#current_hr table {
+#five_day {
+    margin: auto;
+    width: 80%;
+    border: 3px solid black;
+    text-align: center;
+    margin-bottom: 20px;
+    margin-top: 10px;
+    border-radius: 10px;
+    background-color: #e8f1f2ff;
+    box-shadow: 5px 10px #247ba0ff;
+}
+
+#glance table {
     margin: auto;
     width: 90%;
+}
+
+#current table {
+    margin: auto;
+    width: 90%;
+}
+
+#five_day table {
+    margin: auto;
+    width: 90%;
+}
+
+th {
+    font-size: 30px;
+}
+
+td {
+    font-size: 20px; 
 }
