@@ -3,7 +3,7 @@ class hourlyWeather{
     constructor(number,startTime,endTime,isDaytime,
                 temperature,temperatureUnit,probabilityOfPrecipitation,
                 dewpoint,relativeHumidity,windSpeed,windDirection,
-                shortForcast,detailedForecast){
+                icon,shortForcast,detailedForecast){
 
 
                     this.number = number;
@@ -17,6 +17,7 @@ class hourlyWeather{
                     this.relativeHumidity=relativeHumidity;
                     this.windSpeed=windSpeed;
                     this.windDirection=windDirection;
+                    this.icon = icon;
                     this.shortForcast=shortForcast;
                     this.detailedForecast=detailedForecast;
     }
@@ -26,7 +27,7 @@ class longPeriodWeather{
     constructor(number,startTime,endTime,isDaytime,
         temperature,temperatureUnit,probabilityOfPrecipitation,
         dewpoint,relativeHumidity,windSpeed,windDirection,
-        shortForcast,detailedForecast){
+        icon,shortForcast,detailedForecast){
 
 
             this.number = number;
@@ -40,6 +41,7 @@ class longPeriodWeather{
             this.relativeHumidity=relativeHumidity;
             this.windSpeed=windSpeed;
             this.windDirection=windDirection;
+            this.icon = icon;
             this.shortForcast=shortForcast;
             this.detailedForecast=detailedForecast;
     }

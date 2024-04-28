@@ -24,6 +24,7 @@ async function mtsuWeather()
 					   hourlyForecast.properties.periods[i].relativeHumidity,
 					   hourlyForecast.properties.periods[i].windSpeed,
 					   hourlyForecast.properties.periods[i].windDirection,
+             hourlyForecast.properties.periods[i].icon,
 					   hourlyForecast.properties.periods[i].shortForecast,
 					   hourlyForecast.properties.periods[i].detailedForecast);
 	//Output test in console log
@@ -43,6 +44,7 @@ async function mtsuWeather()
 					     longPeriodForecast.properties.periods[i].relativeHumidity,
 					     longPeriodForecast.properties.periods[i].windSpeed,
 					     longPeriodForecast.properties.periods[i].windDirection,
+               longPeriodForecast.properties.periods[i].icon,
 					     longPeriodForecast.properties.periods[i].shortForecast,
 					     longPeriodForecast.properties.periods[i].detailedForecast);
                

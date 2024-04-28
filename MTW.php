@@ -1,3 +1,6 @@
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -9,17 +12,30 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="weatherStorage.js"></script>
     <script src="MTW.js"></script>
-    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <link rel="stylesheet" href="MTW.css">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+
+
+        
     
 </head>
+
 
 <body>
     <div class="w3-bar">
         <a href="#" class="w3-bar-item w3-button w3-border">Middle Tennesee Weather</a>
-        <input type="text" class="w3-bar-item w3-input w3-border" placeholder="City, State">
+        <input type="text" class="w3-bar-item w3-input w3-border" placeholder="City">
+        <input type="text" class="w3-bar-item w3-input w3-border" placeholder="State">
         <a href="#" class="w3-bar-item w3-button w3-border">Search</a>
         <a href="#" class="w3-bar-item w3-button w3-right w3-border">Login</a>
+        <div class="w3-dropdown-hover">
+            <button class="w3-button">Hover Over Me!</button>
+            <div class="w3-dropdown-content w3-bar-block w3-border">
+                <a href="#" class="w3-bar-item w3-button">Link 1</a>
+                <a href="#" class="w3-bar-item w3-button">Link 2</a>
+                <a href="#" class="w3-bar-item w3-button">Link 3</a>
+            </div>
+        </div>
         <input type="text" class="w3-bar-item w3-input w3-right w3-border" placeholder="Password" name="password">
         <input type="text" class="w3-bar-item w3-input w3-right w3-border" placeholder="Username" name="username">
         
@@ -30,7 +46,7 @@
                 <th colspan="2">At a Glance</th>
             </tr>
             <tr>
-                <td><img src="./weather_icons/cloudy.png" alt="" width="150px" id="glance_icon"></td> <td id="glance_data">glance_data</td>
+                <td><img src="https://api.weather.gov/icons/land/night/ovc,9?size=small" width="150px" id="glance_icon"></td> <td id="glance_data">glance_data</td>
             </tr>
         </table>
 
@@ -42,7 +58,8 @@
                 <th colspan="3">Currently</th>
             </tr>
             <tr>
-                <td rowspan="4"><img src="./weather_icons/sunny.png" alt="" width="150px" id="current_icon"></td> <td><img src="./weather_icons/thermometer.png" alt="" width="50px"></td> <td id="current_temp">current_temp</td>
+                <td rowspan="4"><img src="https://api.weather.gov/icons/land/night/ovc,9?size=small" alt="" width="150px" id="current_icon"></td> 
+                <td><img src="./weather_icons/thermometer.png" alt="" width="50px"></td> <td id="current_temp">current_temp</td>
             </tr>
             <tr>
                 <td><img src="./weather_icons/rain.png" alt="" width="50px"></td> <td id="current_rain_chance">current_rain_chance</td>
@@ -64,7 +81,11 @@
                 <th id="day_0">day_0</th> <th id="day_1">day_1</th> <th id="day_2">day_2</th> <th id="day_3">day_3</th> <th id="day_4">day_4</th>
             </tr>
             <tr>
-                <td> <img src="./weather_icons/cloudy.png" alt="" width="150px" id="img_0"> </td> <td> <img src="./weather_icons/sunny.png" alt="" width="150px" id="img_1"> </td> <td> <img src="./weather_icons/sunny.png" alt="" width="150px" id="img_2"> </td> <td> <img src="./weather_icons/sunny.png" alt="" width="150px" id="img_3"> </td> <td> <img src="./weather_icons/sunny.png" alt="" width="150px" id="img_4"> </td>
+                <td> <img src="./weather_icons/cloudy.png" alt="" width="150px" id="img_0"> </td> 
+                <td> <img src="./weather_icons/cloudy.png" alt="" width="150px" id="img_1"> </td>
+                <td> <img src="./weather_icons/cloudy.png" alt="" width="150px" id="img_2"> </td> 
+                <td> <img src="./weather_icons/cloudy.png" alt="" width="150px" id="img_3"> </td> 
+                <td> <img src="./weather_icons/cloudy.png" alt="" width="150px" id="img_4"> </td>
             </tr>
             <tr>
                 <td id="high_0">high_0</td> <td id="high_1">high_1</td> <td id="high_2">high_2</td> <td id="high_3">high_3</td> <td id="high_4">high_4</td>
