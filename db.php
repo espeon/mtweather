@@ -6,7 +6,7 @@ define('SERVER', 'localhost');
 //Store database username.
 define('USERNAME', 'root');
 //Store database password.
-define('PASSWORD', 'Anubis12$');
+define('PASSWORD', 'test');
 //Store database name.
 define('DATABASE', 'CSCI5410');
 
