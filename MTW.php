@@ -34,7 +34,9 @@ if (isset($_POST["Search"])) {
 } elseif (isset($_POST["delete"]) && isset($_SESSION["user"])) {
     removeCity($_SESSION["user"], $_POST["City"],$_POST["State"]);
 }
+
 ?>
+
 
 <body>
     <div class="w3-bar">
@@ -94,7 +96,7 @@ if (isset($_POST["Search"])) {
                 <th colspan="2">At a Glance</th>
             </tr>
             <tr>
-                <td><img src="https://api.weather.gov/icons/land/night/ovc,10?size=small" width="150px" id="glance_icon"></td> <td id="glance_data">glance_data</td>
+                <td><img src="https://api.weather.gov/icons/land/night/ovc,9?size=small" width="150px" id="glance_icon"></td> <td id="glance_data">glance_data</td>
             </tr>
         </table>
 
