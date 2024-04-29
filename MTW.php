@@ -126,7 +126,7 @@ if (isset($_POST["Search"])) {
     <div id="five_day">
         <table>
             <tr>
-                <th id="day_0">day_0</th> <th id="day_1">day_1</th> <th id="day_2">day_2</th> <th id="day_3">day_3</th> <th id="day_4">day_4</th>
+                <th>Today</th> <th>Tomorrow</th> <th id="day_2"></th> <th id="day_3"></th> <th id="day_4"></th>
             </tr>
             <tr>
                 <td> <img src="./weather_icons/cloudy.png" alt="" width="150px" id="img_0"> </td> 
