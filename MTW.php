@@ -61,8 +61,7 @@ if (isset($_POST["Search"])) {
                     $result = $mysqli->query("SELECT * FROM UserCities WHERE UserID = '" . $_SESSION["user"] . "'");
                     while($row = $result->fetch_assoc()) {
                         if ($row["CityName"] != null) {
-                            echo '<a onclick="directedWeather(' . $row["CityName"] . ', ' . $row["State"] . ')" class="w3-bar-item w3-button" style="color: black">' . $row["CityName"] . ", " . $row["State"] . '                    
-                            <form method="post"><input type="hidden" name="City" value="' . $row["CityName"] . '"><input type="hidden" name="State" value="' . $row["State"] . '"><button id="delete" name="delete" type="submit">🗑️</button></form>' . '</a>';
+                            echo '<a onclick="directedWeather(\'' . $row["CityName"] . '\', \'' . $row["State"] . '\')" class="w3-bar-item w3-button" style="color: black">' . $row["CityName"] . ", " . $row["State"] . '                            <form method="post"><input type="hidden" name="City" value="' . $row["CityName"] . '"><input type="hidden" name="State" value="' . $row["State"] . '"><button id="delete" name="delete" type="submit">🗑️</button></form>' . '</a>';
                         }
                     }
                 }
