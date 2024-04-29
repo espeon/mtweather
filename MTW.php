@@ -1,3 +1,21 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>M.T. Weather</title>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jsonld/1.0.0/jsonld.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="weatherStorage.js"></script>
+    <script src="MTW.js"></script>
+    <script src="db.php"></script>
+    <link rel="stylesheet" href="MTW.css">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+</head>
+
 <?php
 require_once "db.php";
 
@@ -16,24 +34,7 @@ if (isset($_POST["Search"])) {
 } elseif (isset($_POST["delete"]) && isset($_SESSION["user"])) {
     removeCity($_SESSION["user"], $_POST["City"],$_POST["State"]);
 }
-
 ?>
-
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>M.T. Weather</title>
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jsonld/1.0.0/jsonld.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-    <script src="weatherStorage.js"></script>
-    <script src="MTW.js"></script>
-    <script src="db.php"></script>
-    <link rel="stylesheet" href="MTW.css">
-    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-</head>
 
 <body>
     <div class="w3-bar">
@@ -93,7 +94,7 @@ if (isset($_POST["Search"])) {
                 <th colspan="2">At a Glance</th>
             </tr>
             <tr>
-                <td><img src="https://api.weather.gov/icons/land/night/ovc,9?size=small" width="150px" id="glance_icon"></td> <td id="glance_data">glance_data</td>
+                <td><img src="https://api.weather.gov/icons/land/night/ovc,10?size=small" width="150px" id="glance_icon"></td> <td id="glance_data">glance_data</td>
             </tr>
         </table>
 

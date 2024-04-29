@@ -1,4 +1,6 @@
+CREATE DATABASE CSCI5410;
 USE CSCI5410;
+
 
 -- user info
 CREATE TABLE UserInfo (

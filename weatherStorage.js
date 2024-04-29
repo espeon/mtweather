@@ -3,7 +3,7 @@ class hourlyWeather{
     constructor(number,startTime,endTime,isDaytime,
                 temperature,temperatureUnit,probabilityOfPrecipitation,
                 dewpoint,relativeHumidity,windSpeed,windDirection,
-                icon,shortForcast,detailedForecast){
+                icon,shortForecast,detailedForecast){
 
 
                     this.number = number;
@@ -18,19 +18,20 @@ class hourlyWeather{
                     this.windSpeed=windSpeed;
                     this.windDirection=windDirection;
                     this.icon = icon;
-                    this.shortForcast=shortForcast;
+                    this.shortForecast=shortForecast;
                     this.detailedForecast=detailedForecast;
     }
 }
 //use array size of 14
 class longPeriodWeather{
-    constructor(number,startTime,endTime,isDaytime,
+    constructor(number,name,startTime,endTime,isDaytime,
         temperature,temperatureUnit,probabilityOfPrecipitation,
         dewpoint,relativeHumidity,windSpeed,windDirection,
-        icon,shortForcast,detailedForecast){
+        icon,shortForecast,detailedForecast){
 
 
             this.number = number;
+            this.name = name;
             this.startTime = startTime;
             this.endTime = endTime;
             this.isDaytime =isDaytime;
@@ -42,7 +43,7 @@ class longPeriodWeather{
             this.windSpeed=windSpeed;
             this.windDirection=windDirection;
             this.icon = icon;
-            this.shortForcast=shortForcast;
+            this.shortForecast=shortForecast;
             this.detailedForecast=detailedForecast;
     }
 }
