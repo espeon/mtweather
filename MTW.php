@@ -1,5 +1,23 @@
+<?php
+require_once "db.php";
 
+if (isset($_POST["login"])) {
+    loginUser($_POST["username"], $_POST["password"]);
+} elseif (isset($_POST["register"])) {
+    registerUser($_POST["username"], $_POST["password"]);
+} elseif (isset($_POST["logout"])) {
+    logoutUser();
+}
 
+if (isset($_POST["Search"])) {
+    echo '<script>directedWeather("' . $_POST["City"] . '", "' . $_POST["State"] . '")</script>';
+} elseif (isset($_POST["Save"]) && isset($_SESSION["user"])) {
+    saveCity($_SESSION["user"], $_POST["City"],$_POST["State"]);
+} elseif (isset($_POST["delete"]) && isset($_SESSION["user"])) {
+    removeCity($_SESSION["user"], $_POST["City"],$_POST["State"]);
+}
+
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -12,32 +30,61 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="weatherStorage.js"></script>
     <script src="MTW.js"></script>
+    <script src="db.php"></script>
     <link rel="stylesheet" href="MTW.css">
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-
-
-        
-    
 </head>
-
 
 <body>
     <div class="w3-bar">
-        <a href="#" class="w3-bar-item w3-button w3-border">Middle Tennesee Weather</a>
-        <input type="text" class="w3-bar-item w3-input w3-border" placeholder="City">
-        <input type="text" class="w3-bar-item w3-input w3-border" placeholder="State">
-        <a href="#" class="w3-bar-item w3-button w3-border">Search</a>
-        <a href="#" class="w3-bar-item w3-button w3-right w3-border">Login</a>
+        <a href="#" class="w3-bar-item w3-button w3-border">Middle Tennessee Weather</a>
+        <form method="post">
+            <input id="City" name="City" type="text" class="w3-bar-item w3-input w3-border" placeholder="City">
+            <input id="State" name="State" type="text" class="w3-bar-item w3-input w3-border" placeholder="State">
+            <div class="w3-dropdown-hover">
+                <button id="login" name="login" type="submit" class="w3-bar-item w3-button w3-border">Search</button>
+                <div class="w3-dropdown-content w3-bar-block">
+                    <button id="Search" name="Search" type="submit" class="w3-bar-item w3-button w3-border">Search</button>
+                    <button id="Save" name="Save" type="submit" class="w3-bar-item w3-button w3-border">Save</button>
+                </div>
+            </div>
+        </form>
         <div class="w3-dropdown-hover">
-            <button class="w3-button">Hover Over Me!</button>
+            <button class="w3-button">Saved Cities</button>
             <div class="w3-dropdown-content w3-bar-block w3-border">
-                <a href="#" class="w3-bar-item w3-button">Link 1</a>
-                <a href="#" class="w3-bar-item w3-button">Link 2</a>
-                <a href="#" class="w3-bar-item w3-button">Link 3</a>
+                <?php
+                if (isset($_SESSION["user"])) {
+                    $mysqli = new \MySQLi(SERVER, USERNAME, PASSWORD, DATABASE);
+                    $result = $mysqli->query("SELECT * FROM UserCities WHERE UserID = '" . $_SESSION["user"] . "'");
+                    while($row = $result->fetch_assoc()) {
+                        if ($row["CityName"] != null) {
+                            echo '<a onclick="directedWeather(' . $row["CityName"] . ', ' . $row["State"] . ')" class="w3-bar-item w3-button" style="color: black">' . $row["CityName"] . ", " . $row["State"] . '                    
+                            <form method="post"><input type="hidden" name="City" value="' . $row["CityName"] . '"><input type="hidden" name="State" value="' . $row["State"] . '"><button id="delete" name="delete" type="submit">🗑️</button></form>' . '</a>';
+                        }
+                    }
+                }
+                ?>
             </div>
         </div>
-        <input type="text" class="w3-bar-item w3-input w3-right w3-border" placeholder="Password" name="password">
-        <input type="text" class="w3-bar-item w3-input w3-right w3-border" placeholder="Username" name="username">
+        <?php
+        if (isset($_SESSION["user"])) {
+            echo '<form method="post">';
+            echo "<button id=\"logout\" name=\"logout\" type=\"submit\" class=\"w3-bar-item w3-button w3-right w3-border\">Logout</button>";
+            echo '</form>';
+        } else {
+            echo '<form method="post">';
+            echo '    <input type="text" class="w3-bar-item w3-input w3-left w3-border" placeholder="Username" name="username">';
+            echo '    <input type="text" class="w3-bar-item w3-input w3-left w3-border" placeholder="Password" name="password">';
+            echo '    <div class="w3-dropdown-hover">';
+            echo '        <button id="login" name="login" type="submit" class="w3-bar-item w3-button w3-right w3-border">Login</button>';
+            echo '        <div class="w3-dropdown-content w3-bar-block">';
+            echo '            <button id="login" name="login" type="submit" class="w3-bar-item w3-button w3-right w3-border">Login</button>';
+            echo '            <button id="register" name="register" type="submit" class="w3-bar-item w3-button w3-right w3-border">Register</button>';
+            echo '        </div>';
+            echo '    </div>';
+            echo '</form>';
+        }
+        ?>
         
     </div>
     <div id="glance">

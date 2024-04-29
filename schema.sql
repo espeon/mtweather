@@ -1,0 +1,17 @@
+USE CSCI5410;
+
+-- user info
+CREATE TABLE UserInfo (
+    UserID INT AUTO_INCREMENT PRIMARY KEY,
+    Username VARCHAR(256) NOT NULL,
+    Password VARCHAR(256) NOT NULL
+);
+
+-- city info
+CREATE TABLE UserCities (
+     CityID INT AUTO_INCREMENT PRIMARY KEY,
+     UserID INT,
+     CityName VARCHAR(256) NOT NULL,
+     State VARCHAR(256) NOT NULL,
+     FOREIGN KEY (UserID) REFERENCES UserInfo(UserID)
+);

@@ -213,7 +213,6 @@ async function getForecast(url){
     var data = await response.json();
     //console.log(data);
     
-    
     return data;
   } catch (error) {
     console.error('Error fetching weather data:', error);
@@ -230,14 +229,12 @@ async function getForecastHourly(url){
     var response = await fetch(url);
     var data = await response.json();
     //console.log(data);
-    
-    
     return data;
+
   } catch (error) {
     console.error('Error fetching weather data:', error);
     return null;
   }
-
 
 }
   
