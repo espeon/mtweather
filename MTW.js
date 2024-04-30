@@ -8,42 +8,8 @@ async function mtsuWeather()
   var hourlyForecast = await getForecastHourly(data);
   var longPeriodForecast = await getForecast(data);
 
-  //Array declarations, forecast objects constructed and pushed into respective arrays
-  let hourlyLocal = [];
-  let longLocal = [];
-  for (let i = 0; i < 12; i++){
-  	hourlyLocal[i] = new hourlyWeather(hourlyForecast.properties.periods[i].number,
-					   hourlyForecast.properties.periods[i].startTime,
-					   hourlyForecast.properties.periods[i].endTime,
-					   hourlyForecast.properties.periods[i].isDaytime,
-					   hourlyForecast.properties.periods[i].temperature,
-					   hourlyForecast.properties.periods[i].temperatureUnit,
-					   hourlyForecast.properties.periods[i].probabilityOfPrecipitation,
-					   hourlyForecast.properties.periods[i].dewpoint,
-					   hourlyForecast.properties.periods[i].relativeHumidity,
-					   hourlyForecast.properties.periods[i].windSpeed,
-					   hourlyForecast.properties.periods[i].windDirection,
-                    hourlyForecast.properties.periods[i].icon,
-					   hourlyForecast.properties.periods[i].shortForecast,
-					   hourlyForecast.properties.periods[i].detailedForecast);
-  }
+  $("#glance_title").html("MTSU At A Glance")
 
-  for (let i = 0; i < 14; i++){
-  	longLocal[i] = new longPeriodWeather(longPeriodForecast.properties.periods[i].number,
-			 		     longPeriodForecast.properties.periods[i].startTime,
-					     longPeriodForecast.properties.periods[i].endTime,
-					     longPeriodForecast.properties.periods[i].isDaytime,
-					     longPeriodForecast.properties.periods[i].temperature,
-					     longPeriodForecast.properties.periods[i].temperatureUnit,
-					     longPeriodForecast.properties.periods[i].probabilityOfPrecipitation,
-					     longPeriodForecast.properties.periods[i].dewpoint,
-					     longPeriodForecast.properties.periods[i].relativeHumidity,
-					     longPeriodForecast.properties.periods[i].windSpeed,
-					     longPeriodForecast.properties.periods[i].windDirection,
-               longPeriodForecast.properties.periods[i].icon,
-					     longPeriodForecast.properties.periods[i].shortForecast,
-					     longPeriodForecast.properties.periods[i].detailedForecast);
-    }
 
     $("#glance_data").html(longPeriodForecast.properties.periods[0].shortForecast + ". High of " + longPeriodForecast.properties.periods[0].temperature + "&deg" + longPeriodForecast.properties.periods[0].temperatureUnit)
     $("#glance_icon").prop('src', longPeriodForecast.properties.periods[0].icon)
@@ -54,28 +20,22 @@ async function mtsuWeather()
     $("#current_wind_speed").html(hourlyForecast.properties.periods[0].windSpeed + " " + hourlyForecast.properties.periods[0].windDirection)
     $("#current_icon").prop('src', hourlyForecast.properties.periods[0].icon)
 
-    $("#day_2").html(longPeriodForecast.properties.periods[4].name)
-    $("#day_3").html(longPeriodForecast.properties.periods[6].name)
-    $("#day_4").html(longPeriodForecast.properties.periods[8].name)
-
-    $("#img_0").prop('src', longPeriodForecast.properties.periods[0].icon)
-    $("#img_1").prop('src', longPeriodForecast.properties.periods[2].icon)
-    $("#img_2").prop('src', longPeriodForecast.properties.periods[4].icon)
-    $("#img_3").prop('src', longPeriodForecast.properties.periods[6].icon)
-    $("#img_4").prop('src', longPeriodForecast.properties.periods[8].icon)
-
-    $("#high_0").html(longPeriodForecast.properties.periods[0].temperature + "&deg" + longPeriodForecast.properties.periods[0].temperatureUnit)
-    $("#high_1").html(longPeriodForecast.properties.periods[2].temperature + "&deg" + longPeriodForecast.properties.periods[2].temperatureUnit) 
-    $("#high_2").html(longPeriodForecast.properties.periods[4].temperature + "&deg" + longPeriodForecast.properties.periods[4].temperatureUnit)
-    $("#high_3").html(longPeriodForecast.properties.periods[6].temperature + "&deg" + longPeriodForecast.properties.periods[6].temperatureUnit)
-    $("#high_4").html(longPeriodForecast.properties.periods[8].temperature + "&deg" + longPeriodForecast.properties.periods[8].temperatureUnit)
-
-    $("#rain_chance_0").html(longPeriodForecast.properties.periods[0].probabilityOfPrecipitation.value + "% chance")
-    $("#rain_chance_1").html(longPeriodForecast.properties.periods[2].probabilityOfPrecipitation.value + "% chance")
-    $("#rain_chance_2").html(longPeriodForecast.properties.periods[4].probabilityOfPrecipitation.value + "% chance")
-    $("#rain_chance_3").html(longPeriodForecast.properties.periods[6].probabilityOfPrecipitation.value + "% chance")
-    $("#rain_chance_4").html(longPeriodForecast.properties.periods[8].probabilityOfPrecipitation.value + "% chance")
-
+    //Display 5 days (long periods) forecast, where i = 0: today, and any 2 "periods" forward means a day
+    for (let i = 0; i < 5; i++){
+	let dayTag = "#day_" + i;
+	let imgTag = "#img_" + i;
+	let highTag = "#high_" + i;
+	let rainTag = "#rain_chance_" + i;
+	
+		$(dayTag).html(longPeriodForecast.properties.periods[i].name)
+	
+	$(imgTag).prop('src', longPeriodForecast.properties.periods[i].icon)
+	$(highTag).html(longPeriodForecast.properties.periods[i].temperature + "&deg" + longPeriodForecast.properties.periods[i*2].temperatureUnit)
+	if (longPeriodForecast.properties.periods[i].probabilityOfPrecipitation.value === null)
+		$(rainTag).html("0% chance")
+    	else
+    		$(rainTag).html(longPeriodForecast.properties.periods[i].probabilityOfPrecipitation.value + "% chance")
+    }
     console.log("mtsuWeather() has been called.");
 }
 
@@ -84,43 +44,11 @@ async function localWeather()
 {
 
   var data = await fetchMetaData(loc[0],loc[1]);//mtsu coordinates
-  var hourlyForecast = await getForecast(data);
-  var longPeriodForecast = await getForecastHourly(data);
+  var hourlyForecast = await getForecastHourly(data);
+  var longPeriodForecast = await getForecast(data);
 
-    //Array declarations, forecast objects constructed and pushed into respective arrays
-    let hourlyLocal = [];
-    let longLocal = [];
-    for (let i = 0; i < 12; i++){
-      hourlyLocal[i] = new hourlyWeather(hourlyForecast.properties.periods[i].number,
-               hourlyForecast.properties.periods[i].startTime,
-               hourlyForecast.properties.periods[i].endTime,
-               hourlyForecast.properties.periods[i].isDaytime,
-               hourlyForecast.properties.periods[i].temperature,
-               hourlyForecast.properties.periods[i].temperatureUnit,
-               hourlyForecast.properties.periods[i].probabilityOfPrecipitation,
-               hourlyForecast.properties.periods[i].dewpoint,
-               hourlyForecast.properties.periods[i].relativeHumidity,
-               hourlyForecast.properties.periods[i].windSpeed,
-               hourlyForecast.properties.periods[i].windDirection,
-               hourlyForecast.properties.periods[i].shortForecast,
-               hourlyForecast.properties.periods[i].detailedForecast);
-    }
-  
-    for (let i = 0; i < 14; i++){
-      longLocal[i] = new longPeriodWeather(longPeriodForecast.properties.periods[i].number,
-                 longPeriodForecast.properties.periods[i].startTime,
-                 longPeriodForecast.properties.periods[i].endTime,
-                 longPeriodForecast.properties.periods[i].isDaytime,
-                 longPeriodForecast.properties.periods[i].temperature,
-                 longPeriodForecast.properties.periods[i].temperatureUnit,
-                 longPeriodForecast.properties.periods[i].probabilityOfPrecipitation,
-                 longPeriodForecast.properties.periods[i].dewpoint,
-                 longPeriodForecast.properties.periods[i].relativeHumidity,
-                 longPeriodForecast.properties.periods[i].windSpeed,
-                 longPeriodForecast.properties.periods[i].windDirection,
-                 longPeriodForecast.properties.periods[i].shortForecast,
-                 longPeriodForecast.properties.periods[i].detailedForecast);
-    }
+  $("#glance_title").html("Your Location At A Glance")
+
 
     $("#glance_data").html(longPeriodForecast.properties.periods[0].shortForecast + ". High of " + longPeriodForecast.properties.periods[0].temperature + "&deg" + longPeriodForecast.properties.periods[0].temperatureUnit)
     $("#glance_icon").prop('src', longPeriodForecast.properties.periods[0].icon)
@@ -131,27 +59,22 @@ async function localWeather()
     $("#current_wind_speed").html(hourlyForecast.properties.periods[0].windSpeed + " " + hourlyForecast.properties.periods[0].windDirection)
     $("#current_icon").prop('src', hourlyForecast.properties.periods[0].icon)
 
-    $("#day_2").html(longPeriodForecast.properties.periods[4].name)
-    $("#day_3").html(longPeriodForecast.properties.periods[6].name)
-    $("#day_4").html(longPeriodForecast.properties.periods[8].name)
-
-    $("#img_0").prop('src', longPeriodForecast.properties.periods[0].icon)
-    $("#img_1").prop('src', longPeriodForecast.properties.periods[2].icon)
-    $("#img_2").prop('src', longPeriodForecast.properties.periods[4].icon)
-    $("#img_3").prop('src', longPeriodForecast.properties.periods[6].icon)
-    $("#img_4").prop('src', longPeriodForecast.properties.periods[8].icon)
-
-    $("#high_0").html(longPeriodForecast.properties.periods[0].temperature + "&deg" + longPeriodForecast.properties.periods[0].temperatureUnit)
-    $("#high_1").html(longPeriodForecast.properties.periods[2].temperature + "&deg" + longPeriodForecast.properties.periods[2].temperatureUnit) 
-    $("#high_2").html(longPeriodForecast.properties.periods[4].temperature + "&deg" + longPeriodForecast.properties.periods[4].temperatureUnit)
-    $("#high_3").html(longPeriodForecast.properties.periods[6].temperature + "&deg" + longPeriodForecast.properties.periods[6].temperatureUnit)
-    $("#high_4").html(longPeriodForecast.properties.periods[8].temperature + "&deg" + longPeriodForecast.properties.periods[8].temperatureUnit)
-
-    $("#rain_chance_0").html(longPeriodForecast.properties.periods[0].probabilityOfPrecipitation.value + "% chance")
-    $("#rain_chance_1").html(longPeriodForecast.properties.periods[2].probabilityOfPrecipitation.value + "% chance")
-    $("#rain_chance_2").html(longPeriodForecast.properties.periods[4].probabilityOfPrecipitation.value + "% chance")
-    $("#rain_chance_3").html(longPeriodForecast.properties.periods[6].probabilityOfPrecipitation.value + "% chance")
-    $("#rain_chance_4").html(longPeriodForecast.properties.periods[8].probabilityOfPrecipitation.value + "% chance")
+    //Display 5 days (long periods) forecast, where i = 0: today, and any 2 "periods" forward means a day
+    for (let i = 0; i < 5; i++){
+	let dayTag = "#day_" + i;
+	let imgTag = "#img_" + i;
+	let highTag = "#high_" + i;
+	let rainTag = "#rain_chance_" + i;
+	
+	$(dayTag).html(longPeriodForecast.properties.periods[i].name)
+	
+	$(imgTag).prop('src', longPeriodForecast.properties.periods[i].icon)
+	$(highTag).html(longPeriodForecast.properties.periods[i].temperature + "&deg" + longPeriodForecast.properties.periods[i].temperatureUnit)
+	if (longPeriodForecast.properties.periods[i].probabilityOfPrecipitation.value === null)
+		$(rainTag).html("0% chance")
+    	else
+    		$(rainTag).html(longPeriodForecast.properties.periods[i].probabilityOfPrecipitation.value + "% chance")
+    }
     
     console.log("localWeather() has been called.");
 }
@@ -167,43 +90,10 @@ async function directedWeather(city,state){
     return;
   }
   var data = await fetchMetaData(loc[0],loc[1]);//mtsu coordinates
-  var hourlyForecast = await getForecast(data);
-  var longPeriodForecast = await getForecastHourly(data);
+  var hourlyForecast = await getForecastHourly(data);
+  var longPeriodForecast = await getForecast(data);
+  $("#glance_title").html(city + " At A Glance")
 
-    //Array declarations, forecast objects constructed and pushed into respective arrays
-    let hourlyLocal = [];
-    let longLocal = [];
-    for (let i = 0; i < 12; i++){
-      hourlyLocal[i] = new hourlyWeather(hourlyForecast.properties.periods[i].number,
-               hourlyForecast.properties.periods[i].startTime,
-               hourlyForecast.properties.periods[i].endTime,
-               hourlyForecast.properties.periods[i].isDaytime,
-               hourlyForecast.properties.periods[i].temperature,
-               hourlyForecast.properties.periods[i].temperatureUnit,
-               hourlyForecast.properties.periods[i].probabilityOfPrecipitation,
-               hourlyForecast.properties.periods[i].dewpoint,
-               hourlyForecast.properties.periods[i].relativeHumidity,
-               hourlyForecast.properties.periods[i].windSpeed,
-               hourlyForecast.properties.periods[i].windDirection,
-               hourlyForecast.properties.periods[i].shortForecast,
-               hourlyForecast.properties.periods[i].detailedForecast);
-    }
-  
-    for (let i = 0; i < 14; i++){
-      longLocal[i] = new longPeriodWeather(longPeriodForecast.properties.periods[i].number,
-                 longPeriodForecast.properties.periods[i].startTime,
-                 longPeriodForecast.properties.periods[i].endTime,
-                 longPeriodForecast.properties.periods[i].isDaytime,
-                 longPeriodForecast.properties.periods[i].temperature,
-                 longPeriodForecast.properties.periods[i].temperatureUnit,
-                 longPeriodForecast.properties.periods[i].probabilityOfPrecipitation,
-                 longPeriodForecast.properties.periods[i].dewpoint,
-                 longPeriodForecast.properties.periods[i].relativeHumidity,
-                 longPeriodForecast.properties.periods[i].windSpeed,
-                 longPeriodForecast.properties.periods[i].windDirection,
-                 longPeriodForecast.properties.periods[i].shortForecast,
-                 longPeriodForecast.properties.periods[i].detailedForecast);
-    }
 
     $("#glance_data").html(longPeriodForecast.properties.periods[0].shortForecast + ". High of " + longPeriodForecast.properties.periods[0].temperature + "&deg" + longPeriodForecast.properties.periods[0].temperatureUnit)
     $("#glance_icon").prop('src', longPeriodForecast.properties.periods[0].icon)
@@ -214,27 +104,22 @@ async function directedWeather(city,state){
     $("#current_wind_speed").html(hourlyForecast.properties.periods[0].windSpeed + " " + hourlyForecast.properties.periods[0].windDirection)
     $("#current_icon").prop('src', hourlyForecast.properties.periods[0].icon)
 
-    $("#day_2").html(longPeriodForecast.properties.periods[4].name)
-    $("#day_3").html(longPeriodForecast.properties.periods[6].name)
-    $("#day_4").html(longPeriodForecast.properties.periods[8].name)
-    
-    $("#img_0").prop('src', longPeriodForecast.properties.periods[0].icon)
-    $("#img_1").prop('src', longPeriodForecast.properties.periods[2].icon)
-    $("#img_2").prop('src', longPeriodForecast.properties.periods[4].icon)
-    $("#img_3").prop('src', longPeriodForecast.properties.periods[6].icon)
-    $("#img_4").prop('src', longPeriodForecast.properties.periods[8].icon)
-
-    $("#high_0").html(longPeriodForecast.properties.periods[0].temperature + "&deg" + longPeriodForecast.properties.periods[0].temperatureUnit)
-    $("#high_1").html(longPeriodForecast.properties.periods[2].temperature + "&deg" + longPeriodForecast.properties.periods[2].temperatureUnit) 
-    $("#high_2").html(longPeriodForecast.properties.periods[4].temperature + "&deg" + longPeriodForecast.properties.periods[4].temperatureUnit)
-    $("#high_3").html(longPeriodForecast.properties.periods[6].temperature + "&deg" + longPeriodForecast.properties.periods[6].temperatureUnit)
-    $("#high_4").html(longPeriodForecast.properties.periods[8].temperature + "&deg" + longPeriodForecast.properties.periods[8].temperatureUnit)
-
-    $("#rain_chance_0").html(longPeriodForecast.properties.periods[0].probabilityOfPrecipitation.value + "% chance")
-    $("#rain_chance_1").html(longPeriodForecast.properties.periods[2].probabilityOfPrecipitation.value + "% chance")
-    $("#rain_chance_2").html(longPeriodForecast.properties.periods[4].probabilityOfPrecipitation.value + "% chance")
-    $("#rain_chance_3").html(longPeriodForecast.properties.periods[6].probabilityOfPrecipitation.value + "% chance")
-    $("#rain_chance_4").html(longPeriodForecast.properties.periods[8].probabilityOfPrecipitation.value + "% chance")
+    //Display 5 days (long periods) forecast, where i = 0: today, and any 2 "periods" forward means a day
+    for (let i = 0; i < 5; i++){
+      let dayTag = "#day_" + i;
+      let imgTag = "#img_" + i;
+      let highTag = "#high_" + i;
+      let rainTag = "#rain_chance_" + i;
+      
+      $(dayTag).html(longPeriodForecast.properties.periods[i].name)
+      
+      $(imgTag).prop('src', longPeriodForecast.properties.periods[i].icon)
+      $(highTag).html(longPeriodForecast.properties.periods[i].temperature + "&deg" + longPeriodForecast.properties.periods[i].temperatureUnit)
+      if (longPeriodForecast.properties.periods[i].probabilityOfPrecipitation.value == null)
+        $(rainTag).html("0% chance")
+          else
+            $(rainTag).html(longPeriodForecast.properties.periods[i].probabilityOfPrecipitation.value + "% chance")
+        }
     console.log("directedWeather() has been called.");
 }
 

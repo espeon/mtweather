@@ -92,7 +92,7 @@ if (isset($_POST["Search"])) {
     <div id="glance">
         <table>
             <tr>
-                <th colspan="2">At a Glance</th>
+                <th id="glance_title" colspan="2">At a Glance</th>
             </tr>
             <tr>
                 <td><img src="https://api.weather.gov/icons/land/night/ovc,9?size=small" width="150px" id="glance_icon"></td> <td id="glance_data">glance_data</td>
@@ -127,7 +127,7 @@ if (isset($_POST["Search"])) {
     <div id="five_day">
         <table>
             <tr>
-                <th>Today</th> <th>Tomorrow</th> <th id="day_2"></th> <th id="day_3"></th> <th id="day_4"></th>
+                <th id= "day_0">day_0</th> <th id = "day_1" >day_1</th> <th id="day_2">day_2</th> <th id="day_3">day_3</th> <th id="day_4">day_4</th>
             </tr>
             <tr>
                 <td> <img src="./weather_icons/cloudy.png" alt="" width="150px" id="img_0"> </td> 
